@@ -4,4 +4,6 @@
     <fullyQualifiedTypeName name="service.ProductService"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="model.Product"/>
+    <fullyQualifiedTypeName name="service.CategoryService"/>
+    <fullyQualifiedTypeName name="model.Category"/>
 </qualifiedTypeNameHistroy>

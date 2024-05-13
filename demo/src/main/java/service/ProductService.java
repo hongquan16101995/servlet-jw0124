@@ -11,11 +11,20 @@ public class ProductService {
 	public ProductService() {
 		super();
 		this.products = new ArrayList<>();
-		this.products.add(new Product(1, "bimbim", 10000, 100, "https://img.lovepik.com/freepng/12/12/80/48358PICfr9i132k3fwAj_PIC2018.png_wh860.png"));
 	}
 
 	public List<Product> getProducts() {
 		return products;
+	}
+	
+	public List<Product> findByCateogory(int categoryId) {
+		List<Product> searchsByC = new ArrayList<>();
+		for(Product p : products) {
+			if (p.getCategory().getId() == categoryId) {
+				searchsByC.add(p);
+			}
+		}
+		return searchsByC;
 	}
 
 	public void createProduct(Product product) {
@@ -45,6 +54,7 @@ public class ProductService {
 			p.setPrice(product.getPrice());
 			p.setQuantity(product.getQuantity());
 			p.setImage(product.getImage());
+			p.setCategory(product.getCategory());
 		}
 	}
 }

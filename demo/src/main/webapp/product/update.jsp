@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +20,12 @@
 	<input name="quantity" value="${product.quantity }" >
 	<p>Image</p>
 	<input name="image" value="${product.image }" >
+	<p>Category</p>
+	<select name="cId">
+		<c:forEach items="${categories }" var="c">
+			<option value = "${c.id }">${c.name }</option>
+		</c:forEach>
+	</select>
 	<button type="submit">Create</button>
 </form>
 </body>

@@ -23,6 +23,7 @@
 		<th>Price</th>
 		<th>Quantity</th>
 		<th>Image</th>
+		<th>Category</th>
 		<th colspan="2">Action</th>
 	</tr>
 	<c:forEach items="${products}" var="p" varStatus="ps">
@@ -32,6 +33,7 @@
 		<td>${p.price }</td>
 		<td>${p.quantity }</td>
 		<td><img src="${p.image }"/></td>
+		<td><a href="/demo/products?action=findByCategory&cId=${p.category.id }">${p.category.name }</a></td>
 		<td><a href="/demo/products?action=updateGet&id=${p.id }"><button>Edit</button></a></td>
 		<td><a href="/demo/products?action=deleteProduct&id=${p.id }"><button>Delete</button></a></td>
 	</tr>
