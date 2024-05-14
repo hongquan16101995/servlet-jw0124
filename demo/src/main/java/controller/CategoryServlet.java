@@ -18,7 +18,7 @@ import service.CategoryService;
 @WebServlet("/categories")
 public class CategoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private CategoryService categoryService = CategoryService.getInstance();
+	private CategoryService categoryService = new CategoryService();
 	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -74,9 +74,8 @@ public class CategoryServlet extends HttpServlet {
 	}
 
 	private void createPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter("id"));
 		String name = request.getParameter("name");
-		categoryService.createCategory(new Category(id, name));
+		categoryService.createCategory(new Category(name));
 		response.sendRedirect("/demo/categories");
 	}
 

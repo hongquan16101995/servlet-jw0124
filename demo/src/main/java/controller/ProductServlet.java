@@ -21,7 +21,7 @@ import service.ProductService;
 public class ProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ProductService productService = new ProductService();
-	private CategoryService categoryService = CategoryService.getInstance();
+	private CategoryService categoryService = new CategoryService();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)

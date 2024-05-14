@@ -1,47 +1,34 @@
 package service;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import DAO.CategoryDAO;
 import model.Category;
 
 public class CategoryService {
-	private List<Category> categories;
-	private static CategoryService categoryService = null;
+	private CategoryDAO categoryDAO;
 
-	private CategoryService() {
+	public CategoryService() {
 		super();
-		this.categories = new ArrayList<>();
-	}
-	
-	public static CategoryService getInstance() {
-		if (categoryService == null) {
-			categoryService = new CategoryService();
-		}
-		return categoryService;
+		this.categoryDAO = new CategoryDAO();
 	}
 
 	public List<Category> getCategories() {
-		return categories;
+		return this.categoryDAO.findAll();
 	}
 
 	public void createCategory(Category category) {
-		this.categories.add(category);
+		this.categoryDAO.create(category);
 	}
 	
 	public Category getById(int id) {
-		for(Category c : categories) {
-			if (c.getId() == id) {
-				return c;
-			}
-		}
-		return null;
+		return this.categoryDAO.findById(id);
 	}
 	
 	public void updateCategory(int id, Category category) {
 		Category c = getById(id);
 		if(c != null) {
-			c.setName(category.getName());
+			this.categoryDAO.update(id, category);
 		}
 	}
 }

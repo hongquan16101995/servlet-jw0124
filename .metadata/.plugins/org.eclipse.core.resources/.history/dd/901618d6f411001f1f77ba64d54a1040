@@ -1,0 +1,40 @@
+package service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import DAO.CategoryDAO;
+import model.Category;
+
+public class CategoryService {
+	private CategoryDAO categoryDAO;
+
+	public CategoryService() {
+		super();
+		this.categoryDAO = new CategoryDAO();
+	}
+
+	public List<Category> getCategories() {
+		return this.categoryDAO.findAll();
+	}
+
+	public void createCategory(Category category) {
+		this.categories.add(category);
+	}
+	
+	public Category getById(int id) {
+		for(Category c : categories) {
+			if (c.getId() == id) {
+				return c;
+			}
+		}
+		return null;
+	}
+	
+	public void updateCategory(int id, Category category) {
+		Category c = getById(id);
+		if(c != null) {
+			c.setName(category.getName());
+		}
+	}
+}
