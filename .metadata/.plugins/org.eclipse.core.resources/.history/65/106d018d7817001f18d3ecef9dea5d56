@@ -1,0 +1,35 @@
+package service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import DAO.ProductDAO;
+import model.Product;
+
+public class ProductService {
+	private ProductDAO productDAO;
+
+	public ProductService() {
+		super();
+		this.productDAO = new ProductDAO();
+	}
+
+	public List<Product> getCategories() {
+		return this.productDAO.findAll();
+	}
+
+	public void createProduct(Product product) {
+		this.productDAO.create(product);
+	}
+	
+	public Product getById(int id) {
+		return this.productDAO.findById(id);
+	}
+	
+	public void updateProduct(int id, Product product) {
+		Product p = getById(id);
+		if(p != null) {
+			this.productDAO.update(id, product);
+		}
+	}
+}

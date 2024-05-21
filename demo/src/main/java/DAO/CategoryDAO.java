@@ -12,9 +12,9 @@ import model.Category;
 
 public class CategoryDAO {
 	private Connection connection;
-	private static final String SELECT_ALL_CATEGORY = "select * from category;";
+	private static final String SELECT_ALL_CATEGORY = "select * from category where status = 0;";
 	private static final String SELECT_BY_ID = "select * from category where id = ?;";
-	private static final String INSERT_INTO = "insert into category(name) value (?);";
+	private static final String INSERT_INTO = "insert into category(name, status) value (?,?);";
 	private static final String UPDATE_BY_ID = "update category set name = ? where id = ?;";
 	
 	public CategoryDAO() {
@@ -28,7 +28,8 @@ public class CategoryDAO {
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String name = rs.getString("name");
-				categories.add(new Category(id, name));
+				int status = rs.getInt("status");
+				categories.add(new Category(id, name, status));
 			}
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -39,6 +40,7 @@ public class CategoryDAO {
 	public void create(Category category) {
 		try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO);) {
 			preparedStatement.setString(1, category.getName());
+			preparedStatement.setInt(2, 0);
 			preparedStatement.executeUpdate();		
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -52,7 +54,8 @@ public class CategoryDAO {
 			while (rs.next()) {
 				int idDb = rs.getInt("id");
 				String name = rs.getString("name");
-				return new Category(idDb, name);
+				int status = rs.getInt("status");
+				return new Category(idDb, name, status);
 			}
 		}catch (SQLException e) {
 			e.printStackTrace();

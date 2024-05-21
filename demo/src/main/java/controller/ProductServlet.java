@@ -45,6 +45,12 @@ public class ProductServlet extends HttpServlet {
 			case "findByCategory":
 				findByCategory(request, response);
 				break;
+			case "sortPrice":
+				sortPrice(request, response);
+				break;
+			case "deleteCategory":
+				deleteCategory(request, response);
+				break;
 			default:
 				displayAllProduct(request, response);
 				break;
@@ -67,6 +73,9 @@ public class ProductServlet extends HttpServlet {
 			case "updatePost":
 				updatePost(request, response);
 				break;
+			case "search":
+				searchByName(request, response);
+				break;
 		}
 	}
 	
@@ -77,10 +86,10 @@ public class ProductServlet extends HttpServlet {
 	}
 	
 	private void findByCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int categoryId = Integer.parseInt(request.getParameter("cId"));
-		List<Product> products = productService.findByCateogory(categoryId);
-		request.setAttribute("products", products);
-		request.getRequestDispatcher("product/list.jsp").forward(request, response);
+//		int categoryId = Integer.parseInt(request.getParameter("cId"));
+//		List<Product> products = productService.findByCateogory(categoryId);
+//		request.setAttribute("products", products);
+//		request.getRequestDispatcher("product/list.jsp").forward(request, response);
 	}
 
 	private void createGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -98,7 +107,7 @@ public class ProductServlet extends HttpServlet {
 		String image = request.getParameter("image");
 		int categoryId = Integer.parseInt(request.getParameter("cId"));
 		Category category = categoryService.getById(categoryId);
-		productService.createProduct(new Product(name, price, quantity, image, category));
+		productService.createProduct(new Product(name, price, quantity, image, category, 0));
 		response.sendRedirect("/demo/products");
 	}
 
@@ -119,7 +128,7 @@ public class ProductServlet extends HttpServlet {
 		String image = request.getParameter("image");
 		int categoryId = Integer.parseInt(request.getParameter("cId"));
 		Category category = categoryService.getById(categoryId);
-		productService.updateProduct(id, new Product(id, name, price, quantity, image, category));
+		productService.updateProduct(id, new Product(id, name, price, quantity, image, category, 0));
 		response.sendRedirect("/demo/products");
 	}
 
@@ -128,5 +137,26 @@ public class ProductServlet extends HttpServlet {
 		productService.deleteProduct(id);
 		response.sendRedirect("/demo/products");
 	}
-
+	
+	private void sortPrice(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String status = request.getParameter("status");
+		List<Product> products = productService.sortByPrice(status);
+		request.setAttribute("products", products);
+		request.getRequestDispatcher("product/list.jsp").forward(request, response);
+	}
+	
+	private void searchByName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String name = request.getParameter("search");
+		List<Product> products = productService.searchByName(name);
+		request.setAttribute("products", products);
+		request.getRequestDispatcher("product/list.jsp").forward(request, response);
+	}
+	
+	private void deleteCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int cId = Integer.parseInt(request.getParameter("cId"));
+		productService.deleteCategory(cId);
+		List<Category> cateogorise = categoryService.getCategories();
+		request.setAttribute("categories", cateogorise);
+		request.getRequestDispatcher("category/list.jsp").forward(request, response);
+	}
 }

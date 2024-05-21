@@ -1,0 +1,50 @@
+package service;
+
+import java.util.List;
+
+import DAO.ProductDAO;
+import model.Product;
+
+public class ProductService {
+	private ProductDAO productDAO;
+
+	public ProductService() {
+		super();
+		this.productDAO = new ProductDAO();
+	}
+
+	public List<Product> getProducts() {
+		return this.productDAO.findAll();
+	}
+
+	public void createProduct(Product product) {
+		this.productDAO.create(product);
+	}
+	
+	public Product getById(int id) {
+		return this.productDAO.findById(id);
+	}
+	
+	public void updateProduct(int id, Product product) {
+		Product p = getById(id);
+		if(p != null) {
+			this.productDAO.update(id, product);
+		}
+	}
+	
+	public void deleteProduct(int id) {
+		this.productDAO.deleteById(id);
+	}
+	
+	public List<Product> sortByPrice(String status) {
+		return this.productDAO.sortByPrice(status);
+	}
+	
+	public List<Product> sortByQuantity(String status) {
+		return this.productDAO.sortByQuantity(status);
+	}
+	
+	public List<Product> searchByName(String name) {
+		return this.productDAO.searchByName(name);
+	}
+}

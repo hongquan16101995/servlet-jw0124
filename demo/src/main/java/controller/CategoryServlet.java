@@ -75,7 +75,7 @@ public class CategoryServlet extends HttpServlet {
 
 	private void createPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String name = request.getParameter("name");
-		categoryService.createCategory(new Category(name));
+		categoryService.createCategory(new Category(name,0));
 		response.sendRedirect("/demo/categories");
 	}
 
@@ -89,7 +89,7 @@ public class CategoryServlet extends HttpServlet {
 	private void updatePost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		String name = request.getParameter("name");
-		categoryService.updateCategory(id, new Category(id, name));
+		categoryService.updateCategory(id, new Category(id, name,0));
 		response.sendRedirect("/demo/categories");
 	}
 }

@@ -31,13 +31,14 @@
 	<tr>
 		<th>STT</th>
 		<th>Name</th>
-		<th>Action</th>
+		<th colspan="2">Action</th>
 	</tr>
 	<c:forEach items="${categories}" var="c" varStatus="cs">
 	<tr>
 		<td>${cs.count }</td>
 		<td>${c.name }</td>
 		<td><a class="btn btn-warning" href="/demo/categories?action=updateGet&id=${c.id }">Edit</a></td>
+		<td><a class="btn btn-danger" href="/demo/products?action=deleteCategory&cId=${c.id }">Delete</a></td>
 	</tr>
 	</c:forEach>
 </table>
