@@ -92,14 +92,13 @@ public class ProductServlet extends HttpServlet {
 	}
 
 	private void createPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter("id"));
 		String name = request.getParameter("name");
 		double price = Double.parseDouble(request.getParameter("price"));
 		int quantity = Integer.parseInt(request.getParameter("quantity"));
 		String image = request.getParameter("image");
 		int categoryId = Integer.parseInt(request.getParameter("cId"));
 		Category category = categoryService.getById(categoryId);
-		productService.createProduct(new Product(id, name, price, quantity, image, category));
+		productService.createProduct(new Product(name, price, quantity, image, category));
 		response.sendRedirect("/demo/products");
 	}
 

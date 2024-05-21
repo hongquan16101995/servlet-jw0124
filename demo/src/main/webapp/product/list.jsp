@@ -21,11 +21,16 @@
 	.btn-primary {
 		margin-bottom: 20px;
 	}
+	
+	a {
+		text-decoration: none;
+		color: black;
+	}
 </style>
 </head>
 <body>
 <div class="container">
-<h1>List Product</h1>
+<h1><a href="/demo/products">List Product</a></h1>
 <a class="btn btn-primary" href="/demo/products?action=createGet">Create new</a>
 <a class="btn btn-primary" href="/demo/categories">List category</a>
 <table class="table table-striped">
